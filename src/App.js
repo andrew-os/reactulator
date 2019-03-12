@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+
+import update from 'immutability-helper'
+import math from 'mathjs'
 
 import DisplayBar from './components/DisplayBar';
 import CalcButtons from './components/CalcButtons';
@@ -35,6 +37,16 @@ class App extends Component {
 			break
 		}
 	}
+	calculateOperations = () => {
+		let result = this.state.operations.join('')
+		if(result){
+			result = math.eval(result)
+			result = math.format(result, { precision: 14})
+			this.setState({
+				operations: [result],
+			})
+		}
+	}
   render() {
     return (
 	  <div className="App reactulator">
@@ -45,21 +57,21 @@ class App extends Component {
 			<CalcButton onClick={this.handleClick} label="*" value="*" color="success"/>
 			<CalcButton onClick={this.handleClick} label="/" value="/" color="success"/>
 
-			<CalcButton onClick={this.handleClick} label="7" value="clear" color="primary"/>
-			<CalcButton onClick={this.handleClick} label="8" value="clear" color="primary"/>
-			<CalcButton onClick={this.handleClick} label="9" value="clear" color="primary"/>
+			<CalcButton onClick={this.handleClick} label="7" value="7" color="primary"/>
+			<CalcButton onClick={this.handleClick} label="8" value="8" color="primary"/>
+			<CalcButton onClick={this.handleClick} label="9" value="9" color="primary"/>
 
-			<CalcButton onClick={this.handleClick} label="4" value="clear" color="primary"/>
-			<CalcButton onClick={this.handleClick} label="5" value="clear" color="primary"/>			
-			<CalcButton onClick={this.handleClick} label="6" value="clear" color="primary"/>
+			<CalcButton onClick={this.handleClick} label="4" value="4" color="primary"/>
+			<CalcButton onClick={this.handleClick} label="5" value="5" color="primary"/>			
+			<CalcButton onClick={this.handleClick} label="6" value="6" color="primary"/>
 			
-			<CalcButton onClick={this.handleClick} label="1" value="clear" color="primary"/>
-			<CalcButton onClick={this.handleClick} label="2" value="clear" color="primary"/>
-			<CalcButton onClick={this.handleClick} label="3" value="clear" color="primary"/>
+			<CalcButton onClick={this.handleClick} label="1" value="1" color="primary"/>
+			<CalcButton onClick={this.handleClick} label="2" value="2" color="primary"/>
+			<CalcButton onClick={this.handleClick} label="3" value="3" color="primary"/>
 			
-			<CalcButton onClick={this.handleClick} label="0" value="0" color="danger"/>
-			<CalcButton onClick={this.handleClick} label="." value="C" color="danger"/>
-			<CalcButton onClick={this.handleClick} label="=" value="=" color="danger"/>
+			<CalcButton onClick={this.handleClick} label="0" value="0" color="warning"/>
+			<CalcButton onClick={this.handleClick} label="C" value="clear" color="danger"/>
+			<CalcButton onClick={this.handleClick} label="=" value="equal" color="success"/>
 
 
 			
